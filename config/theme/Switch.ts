@@ -1,23 +1,23 @@
-import { createStyle } from '@gluestack-style/react';
+import { createStyle } from '@gluestack-style/react'
 
 export const Switch = createStyle({
-  'props': {
+  props: {
     // todo: add support for this in style.gluestack.io
     // trackColor: { false: '$backgroundLight300', true: '$primary600' },
 
     // hacky fix for the above
-    //@ts-ignore
+    //
     trackColor: { false: '$backgroundLight300', true: '$primary600' },
     thumbColor: '$backgroundLight0',
-    //@ts-ignore
+    //
     activeThumbColor: '$backgroundLight0',
 
     // for ios specifically in unchecked state
     ios_backgroundColor: '$backgroundLight300',
   },
-  'borderRadius': '$full',
-  'variants': {
-    //@ts-ignore
+  borderRadius: '$full',
+  variants: {
+    //
 
     size: {
       sm: {
@@ -37,13 +37,13 @@ export const Switch = createStyle({
       },
     },
   },
-  '_web': {
+  _web: {
     ':focus': {
       outlineWidth: 0,
       outlineColor: '$primary700',
       outlineStyle: 'solid',
       _dark: {
-        // @ts-ignore
+        //
         outlineColor: '$primary600',
         outlineWidth: 0,
         outlineStyle: 'solid',
@@ -51,24 +51,24 @@ export const Switch = createStyle({
     },
   },
 
-  'defaultProps': {
+  defaultProps: {
     size: 'md',
   },
   ':disabled': {
-    '_web': {
-      'cursor': 'pointer',
+    _web: {
+      cursor: 'pointer',
       ':disabled': {
         cursor: 'not-allowed',
       },
     },
-    'opacity': 0.4,
-    //@ts-ignore
-    'trackColor': { false: '$backgroundLight300', true: '$primary600' },
+    opacity: 0.4,
+    //
+    trackColor: { false: '$backgroundLight300', true: '$primary600' },
     // for ios specifically in unchecked state
-    'ios_backgroundColor': '$backgroundLight300',
+    ios_backgroundColor: '$backgroundLight300',
     ':hover': {
       props: {
-        //@ts-ignore
+        //
         trackColor: { false: '$backgroundLight300', true: '$primary600' },
       },
     },
@@ -79,12 +79,12 @@ export const Switch = createStyle({
     borderWidth: 2,
   },
   ':hover': {
-    'props': {
+    props: {
       // todo: add support for this in style.gluestack.io
       // trackColor: { false: '$backgroundLight400', true: '$primary700' },
 
       // hacky fix for the above
-      //@ts-ignore
+      //
 
       trackColor: { false: '$backgroundLight400', true: '$primary700' },
       ios_backgroundColor: '$backgroundLight400',
@@ -95,7 +95,7 @@ export const Switch = createStyle({
         // trackColor: { false: '$backgroundLight400', true: '$primary700' },
 
         // hacky fix for the above
-        //@ts-ignore
+        //
 
         trackColor: { false: '$backgroundLight300', true: '$primary700' },
       },
@@ -103,16 +103,16 @@ export const Switch = createStyle({
   },
   ':checked': {
     props: {
-      //@ts-ignore
+      //
       thumbColor: '$backgroundLight0',
     },
   },
-  '_dark': {
-    'props': {
-      //@ts-ignore
+  _dark: {
+    props: {
+      //
       trackColor: { false: '$backgroundDark700', true: '$primary500' },
       thumbColor: '$backgroundDark0',
-      //@ts-ignore
+      //
       activeThumbColor: '$backgroundDark0',
     },
     ':invalid': {
@@ -121,8 +121,8 @@ export const Switch = createStyle({
       borderWidth: 2,
     },
     ':hover': {
-      'props': {
-        //@ts-ignore
+      props: {
+        //
         trackColor: { false: '$backgroundDark600', true: '$primary600' },
         ios_backgroundColor: '$backgroundLight400',
       },
@@ -132,30 +132,30 @@ export const Switch = createStyle({
           // trackColor: { false: '$backgroundLight400', true: '$primary700' },
 
           // hacky fix for the above
-          //@ts-ignore
+          //
 
           trackColor: { false: '$backgroundDark700', true: '$primary600' },
         },
       },
     },
     ':disabled': {
-      '_web': {
-        'cursor': 'pointer',
+      _web: {
+        cursor: 'pointer',
         ':disabled': {
           cursor: 'not-allowed',
         },
       },
-      'opacity': 0.4,
-      //@ts-ignore
-      'trackColor': { false: '$backgroundLight300', true: '$primary500' },
+      opacity: 0.4,
+      //
+      trackColor: { false: '$backgroundLight300', true: '$primary500' },
       // for ios specifically in unchecked state
-      'ios_backgroundColor': '$backgroundLight300',
+      ios_backgroundColor: '$backgroundLight300',
       ':hover': {
         props: {
-          //@ts-ignore
+          //
           trackColor: { false: '$backgroundDark700', true: '$primary500' },
         },
       },
     },
   },
-});
+})

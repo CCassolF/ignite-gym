@@ -1,16 +1,16 @@
-import { createStyle } from '@gluestack-style/react';
+import { createStyle } from '@gluestack-style/react'
 
 export const SelectActionsheetItem = createStyle({
-  'p': '$3',
-  'flexDirection': 'row',
-  'alignItems': 'center',
-  'rounded': '$sm',
-  'w': '$full',
+  p: '$3',
+  flexDirection: 'row',
+  alignItems: 'center',
+  rounded: '$sm',
+  w: '$full',
 
   ':disabled': {
     opacity: 0.4,
     _web: {
-      // @ts-ignore
+      //
       pointerEvents: 'all !important',
       cursor: 'not-allowed',
     },
@@ -32,7 +32,7 @@ export const SelectActionsheetItem = createStyle({
     bg: '$backgroundLight100',
   },
 
-  '_dark': {
+  _dark: {
     ':hover': {
       bg: '$backgroundDark800',
     },
@@ -46,7 +46,7 @@ export const SelectActionsheetItem = createStyle({
     },
   },
 
-  '_web': {
+  _web: {
     ':focusVisible': {
       bg: '$backgroundLight100',
       _dark: {
@@ -54,4 +54,4 @@ export const SelectActionsheetItem = createStyle({
       },
     },
   },
-});
+})

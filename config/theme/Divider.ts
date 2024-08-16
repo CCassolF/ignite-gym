@@ -1,4 +1,4 @@
-import { createStyle } from '@gluestack-style/react';
+import { createStyle } from '@gluestack-style/react'
 
 export const Divider = createStyle({
   bg: '$backgroundLight200',
@@ -20,4 +20,4 @@ export const Divider = createStyle({
   defaultProps: {
     orientation: 'horizontal',
   },
-});
+})
