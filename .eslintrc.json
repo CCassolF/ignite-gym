@@ -3,7 +3,7 @@
   "plugins": ["simple-import-sort"],
   "rules": {
     "simple-import-sort/imports": "error",
-    "camelcase": "off"
-    
+    "camelcase": "off",
+    "@typescript-eslint/no-var-requires": 0
   }
 }
