@@ -2,6 +2,7 @@ import { Center, Heading, Image, Text, VStack } from '@gluestack-ui/themed'
 
 import BackgroundImg from '@/assets/background.png'
 import Logo from '@/assets/logo.svg'
+import { Button } from '@/components/button'
 import { Input } from '@/components/input'
 
 export function SignIn() {
@@ -28,8 +29,22 @@ export function SignIn() {
         <Center gap="$2">
           <Heading color="$gray100">Acesse a conta</Heading>
 
-          <Input placeholder="E-mail" />
-          <Input placeholder="Senha" />
+          <Input
+            placeholder="E-mail"
+            keyboardType="email-address"
+            autoCapitalize="none"
+          />
+          <Input placeholder="Senha" secureTextEntry />
+
+          <Button title="Acessar" />
+        </Center>
+
+        <Center flex={1} justifyContent="flex-end" mt="$4">
+          <Text color="$gray100" fontSize="$sm" mb="$3" fontFamily="$body">
+            Ainda não te acesso?
+          </Text>
+
+          <Button title="Criar conta" />
         </Center>
       </VStack>
     </VStack>

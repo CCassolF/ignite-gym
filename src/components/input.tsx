@@ -9,8 +9,13 @@ export function Input({ ...rest }: InputProps) {
       bg="$gray700"
       h="$14"
       px="$4"
-      borderWidth="$0"
+      borderWidth="$1"
+      borderColor="$gray700"
       borderRadius="$md"
+      $focus={{
+        borderWidth: 1,
+        borderColor: '$green500',
+      }}
     >
       <InputField
         color="$white"
