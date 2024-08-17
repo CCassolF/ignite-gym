@@ -8,6 +8,7 @@ import { StatusBar } from 'react-native'
 
 import { Loading } from '@/components/loading'
 import { SignIn } from '@/screens/sign-in'
+import { SignUp } from '@/screens/sign-up'
 
 import { config } from './config/gluestack-ui.config'
 
