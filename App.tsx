@@ -7,8 +7,7 @@ import { GluestackUIProvider } from '@gluestack-ui/themed'
 import { StatusBar } from 'react-native'
 
 import { Loading } from '@/components/loading'
-import { SignIn } from '@/screens/sign-in'
-import { SignUp } from '@/screens/sign-up'
+import { Routes } from '@/routes'
 
 import { config } from './config/gluestack-ui.config'
 
@@ -22,7 +21,7 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      {fontsLoader ? <SignIn /> : <Loading />}
+      {fontsLoader ? <Routes /> : <Loading />}
     </GluestackUIProvider>
   )
 }
