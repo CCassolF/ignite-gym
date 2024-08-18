@@ -11,6 +11,8 @@ export function HomeHeader() {
       <UserPhoto
         source={{ uri: 'https://github.com/ccassolf.png' }}
         alt="Imagem do usuário"
+        w="$16"
+        h="$16"
       />
       <VStack flex={1}>
         <Text color="$gray100" fontSize="$sm">
