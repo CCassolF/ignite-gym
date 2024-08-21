@@ -9,6 +9,7 @@ import {
 } from '@gluestack-ui/themed'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useNavigation } from '@react-navigation/native'
+import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
@@ -17,6 +18,7 @@ import Logo from '@/assets/logo.svg'
 import { Button } from '@/components/button'
 import { Input } from '@/components/input'
 import { ToastMessage } from '@/components/toast-message'
+import { useAuth } from '@/hooks/use-auth'
 import { AuthNavigatorRoutesProps } from '@/routes/auth.routes'
 import { api } from '@/services/api'
 import { AppError } from '@/utils/app-error'
@@ -37,6 +39,10 @@ const signUpFormSchema = yup.object({
 type SignUpFormData = yup.InferType<typeof signUpFormSchema>
 
 export function SignUp() {
+  const [isLoading, setIsLoading] = useState(false)
+
+  const { signIn } = useAuth()
+
   const toast = useToast()
 
   const {
@@ -57,14 +63,16 @@ export function SignUp() {
 
   async function handleSignUp({ name, email, password }: SignUpFormData) {
     try {
-      const response = await api.post('/users', {
+      setIsLoading(true)
+      await api.post('/users', {
         name,
         email,
         password,
       })
 
-      console.log(response.data)
+      await signIn(email, password)
     } catch (error) {
+      setIsLoading(false)
       const isAppError = error instanceof AppError
       const title = isAppError
         ? error.message
@@ -171,6 +179,7 @@ export function SignUp() {
 
             <Button
               title="Criar e acessar"
+              isLoading={isLoading}
               onPress={handleSubmit(handleSignUp)}
             />
           </Center>
