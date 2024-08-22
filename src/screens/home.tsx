@@ -16,7 +16,7 @@ import { AppError } from '@/utils/app-error'
 export function Home() {
   const [exercises, setExercises] = useState<ExerciseDTO[]>([])
   const [groups, setGroups] = useState<string[]>([])
-  const [groupSelected, setGroupSelected] = useState('Costas')
+  const [groupSelected, setGroupSelected] = useState('antebraço')
   const [isLoading, setIsLoading] = useState(true)
 
   const { navigate } = useNavigation<AppNavigatorRoutesProps>()
