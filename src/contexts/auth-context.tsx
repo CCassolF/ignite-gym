@@ -4,6 +4,7 @@ import { UserDTO } from '@/dtos/user-dto'
 import { api } from '@/services/api'
 import {
   storageAuthTokenGet,
+  storageAuthTokenRemove,
   storageAuthTokenSave,
 } from '@/storage/sorage-auth-token'
 import {
@@ -72,8 +73,10 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
   async function signOut() {
     try {
       setIsLoadingUserStorageData(true)
+
       setUser({} as UserDTO)
       await storageUserRemove()
+      await storageAuthTokenRemove()
     } catch (error) {
       console.log(error)
       throw error
