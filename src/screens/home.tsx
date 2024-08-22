@@ -130,7 +130,7 @@ export function Home() {
               return (
                 <ExerciseCard
                   data={item}
-                  onPress={() => navigate('exercise')}
+                  onPress={() => navigate('exercise', { exerciseId: item.id })}
                 />
               )
             }}
