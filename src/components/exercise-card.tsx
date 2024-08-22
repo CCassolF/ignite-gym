@@ -9,9 +9,14 @@ import {
 import { ChevronRight } from 'lucide-react-native'
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native'
 
-export interface ExerciseCardProps extends TouchableOpacityProps {}
+import { ExerciseDTO } from '@/dtos/exercise-dto'
+import { api } from '@/services/api'
 
-export function ExerciseCard({ ...rest }: ExerciseCardProps) {
+export interface ExerciseCardProps extends TouchableOpacityProps {
+  data: ExerciseDTO
+}
+
+export function ExerciseCard({ data, ...rest }: ExerciseCardProps) {
   return (
     <TouchableOpacity {...rest}>
       <HStack
@@ -24,7 +29,7 @@ export function ExerciseCard({ ...rest }: ExerciseCardProps) {
       >
         <Image
           source={{
-            uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeRsQ82nYWWVoeXxSje3PvOQdYdSanO_iIhV0TN4jcgz_eQBIFaFpRq9tKdewr_dbR9PI&usqp=CAU',
+            uri: `${api.defaults.baseURL}/exercise/thumb/${data.thumb}`,
           }}
           alt="Imagem do exercício"
           w="$16"
@@ -36,14 +41,14 @@ export function ExerciseCard({ ...rest }: ExerciseCardProps) {
 
         <VStack flex={1}>
           <Heading fontSize="$lg" color="$white" fontFamily="$heading">
-            Remada curvada
+            {data.name}
           </Heading>
           <Text fontSize="$sm" color="$gray200" mt="$1" numberOfLines={2}>
-            3 séries x 12 repetições
+            {data.series} séries x {data.repetitions} repetições
           </Text>
         </VStack>
 
-        <Icon as={ChevronRight} color="$gray300" />
+        <Icon as={ChevronRight} color="$gray300" ml="$4" />
       </HStack>
     </TouchableOpacity>
   )
