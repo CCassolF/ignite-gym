@@ -14,6 +14,8 @@ import { ScreenHeader } from '@/components/screen-header'
 import { ToastMessage } from '@/components/toast-message'
 import { UserPhoto } from '@/components/user-photo'
 import { useAuth } from '@/hooks/use-auth'
+import { api } from '@/services/api'
+import { AppError } from '@/utils/app-error'
 
 const profileFormSchema = yup.object({
   name: yup.string().required('Informe o nome.'),
@@ -42,11 +44,12 @@ const profileFormSchema = yup.object({
 type ProfileFormData = yup.InferType<typeof profileFormSchema>
 
 export function Profile() {
+  const [isUpdating, setIsUpdating] = useState(false)
   const [usePhoto, setUserPhoto] = useState('https://github.com/arthurrios.png')
 
   const toast = useToast()
 
-  const { user } = useAuth()
+  const { user, updateUserProfile } = useAuth()
 
   const {
     control,
@@ -61,7 +64,46 @@ export function Profile() {
   })
 
   async function handleUpdateProfile(data: ProfileFormData) {
-    console.log(data)
+    try {
+      setIsUpdating(true)
+
+      const userUpdated = user
+      userUpdated.name = data.name
+
+      await api.put('/users', data)
+
+      await updateUserProfile(userUpdated)
+
+      toast.show({
+        placement: 'top',
+        render: ({ id }) => (
+          <ToastMessage
+            id={id}
+            title="Perfil atualizado com sucesso!."
+            onClose={() => toast.close(id)}
+          />
+        ),
+      })
+    } catch (error) {
+      const isAppError = error instanceof AppError
+      const title = isAppError
+        ? error.message
+        : 'Não foi possível atualizar os dados. Tente novamente mais tarde.'
+
+      toast.show({
+        placement: 'top',
+        render: ({ id }) => (
+          <ToastMessage
+            id={id}
+            action="error"
+            title={title}
+            onClose={() => toast.close(id)}
+          />
+        ),
+      })
+    } finally {
+      setIsUpdating(false)
+    }
   }
 
   async function handleUserPhotoSelect() {
@@ -223,6 +265,7 @@ export function Profile() {
             <Button
               title="Atualizar"
               onPress={handleSubmit(handleUpdateProfile)}
+              isLoading={isUpdating}
             />
           </Center>
         </Center>
