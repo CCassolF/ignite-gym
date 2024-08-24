@@ -7,7 +7,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { ScrollView, TouchableOpacity } from 'react-native'
 import * as yup from 'yup'
 
-// import DefaultUserPhotoImage from '@/assets/userPhotoDefault.png'
+import DefaultUserPhotoImage from '@/assets/userPhotoDefault.png'
 import { Button } from '@/components/button'
 import { Input } from '@/components/input'
 import { ScreenHeader } from '@/components/screen-header'
@@ -45,7 +45,6 @@ type ProfileFormData = yup.InferType<typeof profileFormSchema>
 
 export function Profile() {
   const [isUpdating, setIsUpdating] = useState(false)
-  const [usePhoto, setUserPhoto] = useState('https://github.com/arthurrios.png')
 
   const toast = useToast()
 
@@ -140,7 +139,48 @@ export function Profile() {
           })
         }
 
-        setUserPhoto(photoURI)
+        const fileExtension = photoURI.split('.').pop()
+        const fileName = `${user.name}.${fileExtension}`
+          .toLocaleLowerCase()
+          .replaceAll(' ', '-')
+
+        const photoType = photoSelected.assets[0].type
+
+        const photoFile = {
+          name: fileName,
+          uri: photoURI,
+          type: `${photoType}/${fileExtension}`,
+        }
+
+        const userPhotoUploadForm = new FormData()
+        userPhotoUploadForm.append('avatar', photoFile)
+
+        const avatarUpdateResponse = await api.patch(
+          '/users/avatar',
+          userPhotoUploadForm,
+          {
+            headers: {
+              accept: 'application/json',
+              'content-type': 'multipart/form-data',
+            },
+          },
+        )
+
+        const userUpdated = user
+        userUpdated.avatar = avatarUpdateResponse.data.avatar
+
+        updateUserProfile(userUpdated)
+
+        toast.show({
+          placement: 'top',
+          render: ({ id }) => (
+            <ToastMessage
+              id={id}
+              title="Foto atualizada!."
+              onClose={() => toast.close(id)}
+            />
+          ),
+        })
       }
     } catch (error) {
       console.log(error)
@@ -153,7 +193,15 @@ export function Profile() {
 
       <ScrollView contentContainerStyle={{ paddingBottom: 36 }}>
         <Center mt="$6" px="$10">
-          <UserPhoto source={usePhoto} size="xl" alt="Imagem do usuário" />
+          <UserPhoto
+            source={
+              user.avatar
+                ? { uri: `${api.defaults.baseURL}/avatar/${user.avatar}` }
+                : DefaultUserPhotoImage
+            }
+            size="xl"
+            alt="Imagem do usuário"
+          />
 
           <TouchableOpacity onPress={handleUserPhotoSelect}>
             <Text
